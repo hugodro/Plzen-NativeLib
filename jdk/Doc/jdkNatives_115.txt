@@ -1,0 +1,341 @@
+Notes:
+-: is defined in the jdk lib.
++: is implemented in jdk lib (as 1.04 desc.).
+*: is implemented in jdk lib (as 1.1.5 desc).
+[blank]: not defined yet (new since JDK 1.04).
+java/awt/image/ColorModel.java:
+    private int pData;		// Placeholder for data for native functions
+    private native void deletepData();
+===============================================
+java/io/File.java
+-    private native boolean exists0();
+-    private native boolean canWrite0();
+-    private native boolean canRead0();
+-    private native boolean isFile0();
+-    private native boolean isDirectory0();
+-    private native long lastModified0();
+-    private native long length0();
+-    private native boolean mkdir0();
+-    private native boolean renameTo0(File dest);
+-    private native boolean delete0();
+    private native boolean rmdir0(); // remove empty directory
+-    private native String[] list0();
+    private native String canonPath(String p) throws IOException;
+-    public native boolean isAbsolute();
+===============================================
+java/io/FileDescriptor.java
++    public native boolean valid();
+    public native void sync() throws SyncFailedException;
++    private static native FileDescriptor initSystemFD(FileDescriptor fdObj, 
+===============================================
+java/io/FileInputStream.java
+-    private native void open(String name) throws IOException;
+-    public native int read() throws IOException;
+-    private native int readBytes(byte b[], int off, int len) throws IOException;
+-    public native long skip(long n) throws IOException;
+-    public native int available() throws IOException;
+-    public native void close() throws IOException;
+===============================================
+java/io/FileOutputStream.java
+-    private native void open(String name) throws IOException;
+    private native void openAppend(String name) throws IOException;
+-    public native void write(int b) throws IOException;
++    private native void writeBytes(byte b[], int off, int len) throws IOException;
+-     public native void close() throws IOException;
+// RENDU ICI.
+===============================================
+java/io/ObjectInputStream.java
+    private native Class loadClass0(Class cl, String classname)
+    private native void inputClassFields(Object o, Class cl, int[] fieldSequence)
+    private static native Object allocateNewObject(Class aclass, Class initclass)
+    private static native Object allocateNewArray(Class aclass, int length);
+    private native boolean invokeObjectReader(Object o, Class aclass)
+===============================================
+java/io/ObjectOutputStream.java
+    private native void outputClassFields(Object o, Class cl,
+    private native boolean invokeObjectWriter(Object o, Class c)
+===============================================
+java/io/ObjectStreamClass.java
+    private static native int getClassAccess(Class aclass);
+    private static native String[] getMethodSignatures(Class aclass);
+    private static native int getMethodAccess(Class aclass, String methodsig);
+    private static native String[] getFieldSignatures(Class aclass);
+    private static native int getFieldAccess(Class aclass, String fieldsig);
+    private native ObjectStreamField[] getFields0(Class cl);
+    private static native long getSerialVersionUID(Class cl);
+    private static native boolean hasWriteObject(Class cl);
+===============================================
+java/io/RandomAccessFile.java
+    private native void open(String name, boolean writeable) throws IOException;
+    public native int read() throws IOException;
+    private native int readBytes(byte b[], int off, int len) throws IOException;
+    public native void write(int b) throws IOException;
+    private native void writeBytes(byte b[], int off, int len) throws IOException;
+    public native long getFilePointer() throws IOException;
+    public native void seek(long pos) throws IOException;
+    public native long length() throws IOException;
+    public native void close() throws IOException;
+===============================================
+java/lang/Class.java
+    public static native Class forName(String className)
+    public native Object newInstance() 
+    public native boolean isInstance(Object obj);
+    public native boolean isAssignableFrom(Class cls);
+    public native boolean isInterface();
+    public native boolean isArray();
+    public native boolean isPrimitive();
+    public native String getName();
+    public native ClassLoader getClassLoader();
+    public native Class getSuperclass();
+    public native Class[] getInterfaces();
+    public native Class getComponentType();
+    public native int getModifiers();
+    public native Object[] getSigners();
+    native void setSigners(Object[] signers);
+    static native Class getPrimitiveClass(String name);
+    private native Field[] getFields0(int which);
+    private native Method[] getMethods0(int which);
+    private native Constructor[] getConstructors0(int which);
+    private native Field getField0(String name, int which);
+    private native Method getMethod0(String name, Class[] parameterTypes,
+    private native Constructor getConstructor0(Class[] parameterTypes,
+===============================================
+java/lang/ClassLoader.java
+    private native void init();
+    private native Class defineClass0(String name, 
+    private native void resolveClass0(Class c);
+    private native Class findSystemClass0(String name) 
+    private static native InputStream getSystemResourceAsStream0(String name);
+    private static native String getSystemResourceAsName0(String name);
+===============================================
+java/lang/Compiler.java
+    private static native void initialize();
+    public static native boolean compileClass(Class clazz);
+    public static native boolean compileClasses(String string);
+    public static native Object command(Object any);
+    public static native void enable();
+    public static native void disable();
+===============================================
+java/lang/Double.java
+    public static native long doubleToLongBits(double value);
+    public static native double longBitsToDouble(long bits);
+    static native double valueOf0(String s) throws NumberFormatException;
+===============================================
+java/lang/Float.java
+    public static native int floatToIntBits(float value);
+    public static native float intBitsToFloat(int bits);
+===============================================
+java/lang/Math.java
+    public static native double sin(double a);
+    public static native double cos(double a);
+    public static native double tan(double a);
+    public static native double asin(double a);
+    public static native double acos(double a); 
+    public static native double atan(double a);
+    public static native double exp(double a);
+    public static native double log(double a);
+    public static native double sqrt(double a);
+    public static native double IEEEremainder(double f1, double f2);
+    public static native double ceil(double a);
+    public static native double floor(double a);
+    public static native double rint(double a);
+    public static native double atan2(double a, double b);
+    public static native double pow(double a, double b);
+===============================================
+java/lang/Object.java
+    public final native Class getClass();
+    public native int hashCode();
+    protected native Object clone() throws CloneNotSupportedException;
+    public final native void notify();
+    public final native void notifyAll();
+    public final native void wait(long timeout) throws InterruptedException;
+===============================================
+java/lang/reflect/Array.java
+    public static native int getLength(Object array)
+    public static native Object get(Object array, int index)
+    public static native boolean getBoolean(Object array, int index)
+    public static native byte getByte(Object array, int index)
+    public static native char getChar(Object array, int index)
+    public static native short getShort(Object array, int index)
+    public static native int getInt(Object array, int index)
+    public static native long getLong(Object array, int index)
+    public static native float getFloat(Object array, int index)
+    public static native double getDouble(Object array, int index)
+    public static native void set(Object array, int index, Object value)
+    public static native void setBoolean(Object array, int index, boolean z)
+    public static native void setByte(Object array, int index, byte b)
+    public static native void setChar(Object array, int index, char c)
+    public static native void setShort(Object array, int index, short s)
+    public static native void setInt(Object array, int index, int i)
+    public static native void setLong(Object array, int index, long l)
+    public static native void setFloat(Object array, int index, float f)
+    public static native void setDouble(Object array, int index, double d)
+    private static native Object newArray(Class componentType, int length)
+    private static native Object multiNewArray(Class componentType,
+===============================================
+java/lang/reflect/Constructor.java
+    public native int getModifiers();
+    public native Object newInstance(Object[] initargs)
+===============================================
+java/lang/reflect/Field.java
+    public native int getModifiers();
+    public native Object get(Object obj)
+    public native boolean getBoolean(Object obj)
+    public native byte getByte(Object obj)
+    public native char getChar(Object obj)
+    public native short getShort(Object obj)
+    public native int getInt(Object obj)
+    public native long getLong(Object obj)
+    public native float getFloat(Object obj)
+    public native double getDouble(Object obj)
+    public native void set(Object obj, Object value)
+    public native void setBoolean(Object obj, boolean z)
+    public native void setByte(Object obj, byte b)
+    public native void setChar(Object obj, char c)
+    public native void setShort(Object obj, short s)
+    public native void setInt(Object obj, int i)
+    public native void setLong(Object obj, long l)
+    public native void setFloat(Object obj, float f)
+    public native void setDouble(Object obj, double d)
+===============================================
+java/lang/reflect/Method.java
+    public native int getModifiers();
+    public native Object invoke(Object obj, Object[] args)
+===============================================
+java/lang/Runtime.java
+    private native void exitInternal(int status);
+    private static native void runFinalizersOnExit0(boolean value);
+    private native Process execInternal(String cmdarray[], String envp[]) 
+    public native long freeMemory();
+    public native long totalMemory();
+    public native void gc();
+    public native void runFinalization();
+    public native void traceInstructions(boolean on);
+    public native void traceMethodCalls(boolean on);
+    private synchronized native String initializeLinkerInternal();
+    private native String buildLibName(String pathname, String filename);
+    private native int loadFileInternal(String filename);
+===============================================
+java/lang/SecurityManager.java
+    protected native Class[] getClassContext();
+    protected native ClassLoader currentClassLoader();
+    protected native int classDepth(String name);
+    protected native int classLoaderDepth();
+    private native Class currentLoadedClass0();
+===============================================
+java/lang/String.java
+    public native String intern(); 
+===============================================
+java/lang/System.java
+    private static native void setIn0(InputStream in);
+    private static native void setOut0(PrintStream out);
+    private static native void setErr0(PrintStream err);
+    public static native long currentTimeMillis();
+    public static native void arraycopy(Object src, int src_position,
+    public static native int identityHashCode(Object x);
+    private static native Properties initProperties(Properties props);
+===============================================
+java/lang/Thread.java
+    public static native Thread currentThread();
+    public static native void yield();
+    public static native void sleep(long millis) throws InterruptedException;
+    public synchronized native void start();
+    private native boolean isInterrupted(boolean ClearInterrupted);
+    public final native boolean isAlive();
+    public native int countStackFrames();
+    private native void setPriority0(int newPriority);
+    private native void stop0(Object o);
+    private native void suspend0();
+    private native void resume0();
+    private native void interrupt0();
+===============================================
+java/lang/Throwable.java
+    private native void printStackTrace0(Object s);
+    public native Throwable fillInStackTrace();
+===============================================
+java/math/BigInteger.java
+    private static native void plumbInit();
+    private static native byte[] plumbAdd(byte[] a, byte[] b);
+    private static native BigInteger plumbSubtract(byte[] a, byte[] b);
+    private static native byte[] plumbMultiply(byte[] a, byte[] b);
+    private static native byte[] plumbDivide(byte[] a, byte[] b);
+    private static native byte[] plumbRemainder(byte[] a, byte[] b);
+    private static native byte[][] plumbDivideAndRemainder(byte[] a, byte[] b);
+    private static native byte[] plumbGcd(byte[] a, byte[] b);
+    private static native byte[] plumbModPow(byte[] a, byte[] b, byte[] m);
+    private static native byte[] plumbModInverse(byte[] a, byte[] m);
+    private static native byte[] plumbSquare(byte[] a);
+    private static native byte[] plumbGeneratePrime(byte[] a);
+===============================================
+java/net/InetAddress.java
+    native String getLocalHostName() throws UnknownHostException;
+    native void makeAnyLocalAddress(InetAddress addr);
+    native String getHostByAddr(int addr) throws UnknownHostException;
+    native int getInetFamily();
+===============================================
+java/net/PlainDatagramSocketImpl.java
+    protected synchronized native void bind(int lport, InetAddress laddr) throws SocketException;
+    protected native void send(DatagramPacket p) throws IOException;
+    protected synchronized native int peek(InetAddress i) throws IOException;
+    protected synchronized native void receive(DatagramPacket p) throws IOException;
+    protected native void setTTL(byte ttl) throws IOException;
+    protected native byte getTTL() throws IOException;
+    protected native void join(InetAddress inetaddr) throws IOException;
+    protected native void leave(InetAddress inetaddr) throws IOException;
+    private native void datagramSocketCreate() throws SocketException;
+    private native void datagramSocketClose();
+    private native void socketSetOption(int opt, Object val) throws SocketException;
+    private native int socketGetOption(int opt) throws SocketException;
+===============================================
+java/net/PlainSocketImpl.java
+    private native void socketCreate(boolean isServer) throws IOException;
+    private native void socketConnect(InetAddress address, int port)
+    private native void socketBind(InetAddress address, int port)
+    private native void socketListen(int count)
+    private native void socketAccept(SocketImpl s)
+    private native int socketAvailable()
+    private native void socketClose()
+    private static native void initProto();
+    private native void socketSetOption(int cmd, boolean on, Object value) 
+    private native int socketGetOption(int opt) throws SocketException;
+===============================================
+ java/net/SocketInputStream.java
+   private native int socketRead(byte b[], int off, int len)
+===============================================
+ java/net/SocketOutputStream.java
+   private native void socketWrite(byte b[], int off, int len)
+===============================================
+java/sql/Connection.java
+    String nativeSQL(String sql) throws SQLException;
+===============================================
+ java/util/ResourceBundle.java
+    private static native Class[] getClassContext();
+===============================================
+java/util/zip/Adler32.java
+    public native void update(byte[] b, int off, int len);
+    private native void update1(int b);
+===============================================
+java/util/zip/CRC32.java
+    public native void update(byte[] b, int off, int len);
+    private native void update1(int b);
+===============================================
+java/util/zip/Deflater.java
+    public synchronized native void setDictionary(byte[] b, int off, int len);
+    public synchronized native int deflate(byte[] b, int off, int len);
+    public synchronized native int getAdler();
+    public synchronized native int getTotalIn();
+    public synchronized native int getTotalOut();
+    public synchronized native void reset();
+    public synchronized native void end();
+    private native void init(boolean nowrap);
+===============================================
+java/util/zip/Inflater.java
+    public synchronized native void setDictionary(byte[] b, int off, int len);
+    public synchronized native int inflate(byte[] b, int off, int len)
+    public synchronized native int getAdler();
+    public synchronized native int getTotalIn();
+    public synchronized native int getTotalOut();
+    public synchronized native void reset();
+    public synchronized native void end();
+    private native void init(boolean nowrap);
+===============================================

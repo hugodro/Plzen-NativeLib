@@ -1,0 +1,14 @@
+#/************************************************
+#* File: makefile.
+#* Desc: Building definitions for the Java basic system classes.
+PROJECT= jdk
+
+include $(AKRAPROJ)/geneMake.lnx
+
+CPPSRCS= array.cpp constructor.cpp field.cpp method.cpp
+
+all: $(OBJS)
+
+clean:
+	rm $(OBJS)
+

@@ -1,0 +1,14 @@
+#/************************************************
+#* File: makefile.
+#* Desc: Building definitions for the Java basic system classes.
+PROJECT= jdk
+
+CPPSRCS= datagramSocket.cpp inetAddress.cpp plainSocketImpl.cpp \
+	socketInputStream.cpp socketOutputStream.cpp
+
+
+all: $(OBJS)
+
+clean:
+	rm $(OBJS)
+

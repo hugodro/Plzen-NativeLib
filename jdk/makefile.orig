@@ -1,0 +1,46 @@
+#/************************************************
+#* File: makefile.
+#* Desc: Building definitions for the Java basic system classes.
+VPATH= ..
+
+SRC_LANG= lang/class.cc ../lang/system.cc ../lang/object.cc ../lang/thread.cc lang/runtime.cc
+SRC_IO= ../io/fileDescriptor.cc ../io/randomAccessFile.cc ../io/fileOutputStream.cc
+SRCS= $(SRC_LANG) $(SRC_IO)
+
+OBJ_LANG= ../lang/class.o ../lang/system.o ../lang/object.o ../lang/thread.o ../lang/runtime.o
+OBJ_IO= ../io/fileDescriptor.o ../io/randomAccessFile.o ../io/fileOutputStream.o
+OBJS= $(OBJ_LANG) $(OBJ_IO)
+
+#INC= -I$(AKRAHOME) -I$(AKRAHOME)/Plzen
+INC= -I$(PLZENHOME)/include
+CC= g++-go32
+
+CFLAGS= -g -DDEBUG_1 
+#LDFLAGS= -r -seglinkedit -fvmlib
+#LDFLAGS= -r -lNeXT_s -t -whyload -whatsloaded
+#LDFLAGS= -r
+
+.SUFFIXES: .cc
+
+subdirs= lang io
+
+#all: javalib.ddl
+all:
+	@for i in $(subdirs); do (cd $$i && $(MAKE) all) || exit 1 ; done
+
+javalib.ddl: $(OBJS)
+	$(LD) -o javalib.ddl $(LDFLAGS) $(OBJS)
+
+install: javalib.ddl
+	mv javalib.ddl /usr/local/packages/java/lib
+
+clean:
+	rm ../lang/*.o
+	rm ../io/*.o
+
+.c.o:
+	$(CC) $(CFLAGS) -o $(VPATH)/$@ -c  $<
+
+.cc.o:
+	$(CC) $(INC) $(CFLAGS)  -o $(VPATH)/$@ -c  $<
+	

@@ -1,0 +1,37 @@
+#/************************************************
+#* File: makefile.
+#* Desc: Building definitions for the Java basic system classes.
+PROJECT= jdk
+VERSION= 0.1
+
+include $(AKRAPROJ)/geneMake.lnx
+
+CFLAGS= -g -DDEBUG_1 -DLINUX -D_REENTRANT
+#LDFLAGS= -shared -dy  -lc
+LDFLAGS= -shared -v
+LIBS=
+INC:= $(INC) -I$(MIDFRMHOME)/Languages/Plzen/NativeLib/inc
+
+PROCOBJ= $(OBJDEST)/PlzVM/$(ARCHITECTURE)
+SYSVOBJ= $(OBJDEST)/SysVvm/$(ARCHITECTURE)
+OFILES= $(PROCOBJ)/stacks.o $(PROCOBJ)/stringSupport.o \
+	$(PROCOBJ)/jvInstance.o $(PROCOBJ)/cmLoadLib.o \
+	$(PROCOBJ)/math64bits.o $(SYSVOBJ)/sysvDynLib.o \
+	$(PROCOBJ)/dynamicLibrary.o
+
+
+#LIBOBJS= ../../lang/$(OBJ_PATH)/*.o ../../io/$(OBJ_PATH)/*.o
+LIBOBJS= $(OBJ_PATH)/*.o
+subdirs= lang io
+
+all: $(DYNNAMELIB).$(VERSION)
+
+$(DYNNAMELIB).$(VERSION): $(OBJS)
+	@for i in $(subdirs); do (cd $$i && $(MAKE) -f makefile.lnx) || exit 1 ; done
+	(cd $(OBJ_PATH) && \
+	    g++ $(LDFLAGS) $(LIBOBJS) $(OFILES) $(LIBS) -o $@ \
+	)
+
+clean:
+	@for i in $(subdirs); do (cd $$i && $(MAKE) -f makefile.lnx clean) || exit 1 ; done
+

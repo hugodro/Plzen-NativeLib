@@ -1,0 +1,18 @@
+#/************************************************
+#* File: makefile.
+#* Desc: Building definitions for the Java basic system classes.
+PROJECT= jdk
+
+include $(AKRAPROJ)/geneMake.lnx
+
+INC:= $(INC) -I$(MIDFRHOME)/Languages/Plzen/include
+
+CPPSRCS= fileDescriptor.cpp \
+	randomAccessFile.cpp \
+	fileOutputStream.cpp
+
+all: $(OBJS)
+
+
+clean:
+	rm $(OBJS)

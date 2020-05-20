@@ -1,0 +1,13 @@
+#/************************************************
+#* File: makefile.
+#* Desc: Building definitions for the Java basic system classes.
+PROJECT= jdk
+
+
+CPPSRCS= date.cpp
+
+all: $(OBJS)
+
+clean:
+	rm $(OBJS)
+

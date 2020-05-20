@@ -1,0 +1,198 @@
+package java.io:
+
+FileDescriptor (2):
+filede~1.jav:    public native boolean valid();
+filede~1.jav:	private static native FileDescriptor initSystemFD(FileDescriptor fdObj, int desc);
+ 
+
+FileInputStream (6):
+filein~1.jav:	private native void open(String name) throws IOException;
+filein~1.jav:	public native int read() throws IOException;
+filein~1.jav:    private native int readBytes(byte b[], int off, int len) throws IOException;
+filein~1.jav:    public native long skip(long n) throws IOException;
+filein~1.jav:    public native int available() throws IOException;
+filein~1.jav:    public native void close() throws IOException;
+
+FileOutputStream (4):
+fileou~1.jav:    private native void open(String name) throws IOException;
+fileou~1.jav:    public native void write(int b) throws IOException;
+fileou~1.jav:    private native void writeBytes(byte b[], int off, int len) throws IOException;
+fileou~1.jav:     public native void close() throws IOException;
+
+File (12):
+file~1.jav:    private native boolean exists0();
+file~1.jav:    private native boolean canWrite0();
+file~1.jav:    private native boolean canRead0();
+file~1.jav:    private native boolean isFile0();
+file~1.jav:    private native boolean isDirectory0();
+file~1.jav:    private native long lastModified0();
+file~1.jav:    private native long length0();
+file~1.jav:    private native boolean mkdir0();
+file~1.jav:    private native boolean renameTo0(File dest);
+file~1.jav:    private native boolean delete0();
+file~1.jav:    private native String[] list0();
+file~1.jav:    public native boolean isAbsolute();
+
+RandomAccessFile (9):
+random~1.jav:    private native void open(String name, boolean writeable) throws IOException;
+random~1.jav:    public native int read() throws IOException;
+random~1.jav:    private native int readBytes(byte b[], int off, int len) throws IOException;
+random~1.jav:    public native void write(int b) throws IOException;
+random~1.jav:    private native void writeBytes(byte b[], int off, int len) throws IOException;
+random~1.jav:    public native long getFilePointer() throws IOException;
+random~1.jav:    public native void seek(long pos) throws IOException;
+random~1.jav:    public native long length() throws IOException;
+random~1.jav:    public native void close() throws IOException;
+
+
+===============================================
+package java.lang:
+
+ClassLoader (4):
+classl~1.jav:    protected native final Class defineClass(byte data[], int offset, int length);
+classl~1.jav:    protected native final void resolveClass(Class c);
+classl~1.jav:    protected native final Class findSystemClass(String name) throws ClassNotFoundException;
+classl~1.jav:    private native void init();
+
+Class (7):
+class~1.jav:    public static native Class forName(String className) throws ClassNotFoundException;
+class~1.jav:    public native Object newInstance() 
+class~1.jav:    public native String getName();
+class~1.jav:    public native Class getSuperclass();
+class~1.jav:    public native Class getInterfaces()[];
+class~1.jav:    public native ClassLoader getClassLoader();
+class~1.jav:    public native boolean isInterface();
+
+Compiler (6):
+compil~1.jav:    private static native void initialize();
+compil~1.jav:    public static native boolean compileClass(Class clazz);
+compil~1.jav:    public static native boolean compileClasses(String string);
+compil~1.jav:    public static native Object command(Object any);
+compil~1.jav:    public static native void enable();
+compil~1.jav:    public static native void disable();
+
+Double (4):
+double~1.jav:    public static native String toString(double d);
+double~1.jav:    public static native Double valueOf(String s) throws NumberFormatException;
+double~1.jav:    public static native long doubleToLongBits(double value);
+double~1.jav:    public static native double longBitsToDouble(long bits);
+
+Float (4):
+float~1.jav:    public static native String toString(float f);
+float~1.jav:    public static native Float valueOf(String s) throws NumberFormatException;
+float~1.jav:    public static native int floatToIntBits(float value);
+float~1.jav:    public static native float intBitsToFloat(int bits);
+
+Math (15):
+math~1.jav:    public static native double sin(double a);
+math~1.jav:    public static native double cos(double a);
+math~1.jav:    public static native double tan(double a);
+math~1.jav:    public static native double asin(double a);
+math~1.jav:    public static native double acos(double a); 
+math~1.jav:    public static native double atan(double a);
+math~1.jav:    public static native double exp(double a);
+math~1.jav:    public static native double log(double a) throws ArithmeticException;
+math~1.jav:    public static native double sqrt(double a) throws ArithmeticException;
+math~1.jav:    public static native double IEEEremainder(double f1, double f2);
+math~1.jav:    public static native double ceil(double a);
+math~1.jav:    public static native double floor(double a);
+math~1.jav:    public static native double rint(double a);
+math~1.jav:    public static native double atan2(double a, double b);
+math~1.jav:    public static native double pow(double a, double b) throws ArithmeticException;
+
+Object (6):
+object~1.jav:    public final native Class getClass();
+object~1.jav:    public native int hashCode();
+object~1.jav:    protected native Object clone() throws CloneNotSupportedException;
+object~1.jav:    public final native void notify();
+object~1.jav:    public final native void notifyAll();
+object~1.jav:    public final native void wait(long timeout) throws InterruptedException;
+
+Runtime (11):
+runtim~1.jav:    private native void exitInternal(int status);
+runtim~1.jav:    private native Process execInternal(String cmdarray[], String envp[]) 
+runtim~1.jav:    public native long freeMemory();
+runtim~1.jav:    public native long totalMemory();
+runtim~1.jav:    public native void gc();
+runtim~1.jav:    public native void runFinalization();
+runtim~1.jav:    public native void traceInstructions(boolean on);
+runtim~1.jav:    public native void traceMethodCalls(boolean on);
+runtim~1.jav:    private synchronized native String initializeLinkerInternal();
+runtim~1.jav:    private native String buildLibName(String pathname, String filename);
+runtim~1.jav:    private native boolean loadFileInternal(String filename);
+
+SecurityManager (4):
+securi~2.jav:    protected native Class[] getClassContext();
+securi~2.jav:    protected native ClassLoader currentClassLoader();
+securi~2.jav:    protected native int classDepth(String name);
+securi~2.jav:    protected native int classLoaderDepth();
+
+System (3):
+system~1.jav:    public static native long currentTimeMillis();
+system~1.jav:    public static native void arraycopy(Object src, int src_position,
+system~1.jav:    private static native Properties initProperties(Properties props);
+
+Thread (10):
+thread~2.jav:    public static native Thread currentThread();
+thread~2.jav:    public static native void yield();
+thread~2.jav:    public static native void sleep(long millis) throws InterruptedException;
+thread~2.jav:    public synchronized native void start();
+thread~2.jav:    public final native boolean isAlive();
+thread~2.jav:    public native int countStackFrames();
+thread~2.jav:    private native void setPriority0(int newPriority);
+thread~2.jav:    private native void stop0(Object o);
+thread~2.jav:    private native void suspend0();
+thread~2.jav:    private native void resume0();
+
+Throwable (2):
+throwa~1.jav:    private native void printStackTrace0(java.io.PrintStream s);
+throwa~1.jav:    public native Throwable fillInStackTrace();
+
+===============================================
+package java.net:
+class DatagramSocket, static initialization: System.loadLibrary("net");
+class InetAddress, static initialization: System.loadLibrary("net");
+class PlainSocketImpl, static initialization: System.loadLibrary("net");
+
+
+DatagramSocket (6):
+datagr~2.jav:    private native void datagramSocketCreate();
+datagr~2.jav:    private native int  datagramSocketBind(int port);
+datagr~2.jav:    private native void datagramSocketSend(DatagramPacket p);
+datagr~2.jav:    private native int datagramSocketPeek(InetAddress i);
+datagr~2.jav:    private native void datagramSocketReceive(DatagramPacket p);
+datagr~2.jav:    private native void datagramSocketClose();
+
+InetAddress (6):
+inetad~1.jav:    private static native String getLocalHostName() throws UnknownHostException;
+inetad~1.jav:    private static native void makeAnyLocalAddress(InetAddress addr);
+inetad~1.jav:    private static native byte[] lookupHostAddr(String hostname) throws UnknownHostException;
+inetad~1.jav:    private static native byte[][] lookupAllHostAddr(String hostname) throws UnknownHostException;
+inetad~1.jav:    private static native String getHostByAddr(int addr) throws UnknownHostException;
+inetad~1.jav:    private static native int getInetFamily();
+
+PlainSocketImpl (7):
+plains~1.jav:    private native void socketCreate(boolean stream) throws IOException;
+plains~1.jav:    private native void socketConnect(InetAddress address, int port)
+plains~1.jav:    private native void socketBind(InetAddress address, int port)
+plains~1.jav:    private native void socketListen(int count)
+plains~1.jav:    private native void socketAccept(SocketImpl s)
+plains~1.jav:    private native int socketAvailable()
+plains~1.jav:    private native void socketClose()
+
+SocketInputStream (1):
+soed13~5.jav:    private native int socketRead(byte b[], int off, int len) throws IOException;
+
+SocketOutputStream (1):
+soedde~5.jav:    private native void socketWrite(byte b[], int off, int len) throws IOException;
+
+
+===============================================
+package java.util:
+
+Date (5):
+date~1.jav:    public native String toString();
+date~1.jav:    public native String toLocaleString();
+date~1.jav:    public native String toGMTString();
+date~1.jav:    private native void expand();
+date~1.jav:    private native void computeValue();

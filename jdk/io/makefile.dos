@@ -1,0 +1,32 @@
+#/************************************************
+#* File: makefile.
+#* Desc: Building definitions for the Java basic system classes.
+ARCHPATH= $(PLZENHOME)/bins/dos_i386
+PROJECT= jdkit
+SHORTOBJPATH= ../objs_dos
+VPATH= $(SHORTOBJPATH)
+
+SRCS= fileDescriptor.cc randomAccessFile.cc fileOutputStream.cc
+OBJS= fileDescriptor.o randomAccessFile.o fileOutputStream.o
+
+INC= -I$(AKRAHOME)/Projets -I$(PLZENHOME)/include
+CC= g++-go32
+
+#  -D__extension__=''
+CFLAGS= -g -DDEBUG_1
+#LDFLAGS= -r
+
+.SUFFIXES: .cc
+
+all: $(OBJS)
+
+
+clean:
+	rm $(OBJS)
+
+.c.o:
+	$(CC) $(CFLAGS) -o $(ARCHPATH)/$(PROJECT)/$@ -c  $<
+
+.cc.o:
+	$(CC) $(INC) $(CFLAGS)  -o $(ARCHPATH)/$(PROJECT)/$@ -c  $<
+

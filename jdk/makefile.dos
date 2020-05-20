@@ -1,0 +1,34 @@
+#/************************************************
+#* File: makefile.
+#* Desc: Building definitions for the Java basic system classes.
+ARCHPATH= $(PLZENHOME)/bins/dos_i386
+PROJECT= jdkit
+SHORTOBJPATH= ../objs_dos
+VPATH= $(SHORTOBJPATH)
+
+INC= -I$(PLZENHOME)/include
+CC= g++-go32
+LD=/usr/i386-go32/bin/ld
+
+CFLAGS= -g -DDEBUG_1 
+LDFLAGS= -Ur
+
+.SUFFIXES: .cc
+
+subdirs= lang io
+
+#all: javalib.ddl
+all:
+	@for i in $(subdirs); do (cd $$i && $(MAKE) -f makefile.dos all) || exit 1 ; done
+	(cd $(ARCHPATH)/$(PROJECT) && $(LD) $(LDFLAGS) -o javalib.ddl *.o -T/usr/local/lib/i386-go32/dlm.djl) || exit 1 ;
+
+
+javalib.ddl: $(OBJS)
+	$(LD) -o javalib.ddl $(LDFLAGS) $(OBJS)
+
+install: javalib.ddl
+	mv javalib.ddl /usr/local/packages/java/lib
+
+clean:
+	@for i in $(subdirs); do (cd $$i && $(MAKE) -f makefile.dos clean) || exit 1 ; done
+
